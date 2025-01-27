@@ -1,33 +1,85 @@
+/****************************************************************************
+**
+** Copyright (C) 2012 Nokia Corporation and/or its subsidiary(-ies).
+** Contact: http://www.qt-project.org/
+**
+** This file is part of the QtSql module of the Qt Toolkit.
+**
+** $QT_BEGIN_LICENSE:LGPL$
+** GNU Lesser General Public License Usage
+** This file may be used under the terms of the GNU Lesser General Public
+** License version 2.1 as published by the Free Software Foundation and
+** appearing in the file LICENSE.LGPL included in the packaging of this
+** file. Please review the following information to ensure the GNU Lesser
+** General Public License version 2.1 requirements will be met:
+** http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+**
+** In addition, as a special exception, Nokia gives you certain additional
+** rights. These rights are described in the Nokia Qt LGPL Exception
+** version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
+**
+** GNU General Public License Usage
+** Alternatively, this file may be used under the terms of the GNU General
+** Public License version 3.0 as published by the Free Software Foundation
+** and appearing in the file LICENSE.GPL included in the packaging of this
+** file. Please review the following information to ensure the GNU General
+** Public License version 3.0 requirements will be met:
+** http://www.gnu.org/copyleft/gpl.html.
+**
+** Other Usage
+** Alternatively, this file may be used in accordance with the terms and
+** conditions contained in a signed written agreement between you and Nokia.
+**
+**
+**
+**
+**
+**
+** $QT_END_LICENSE$
+**
+****************************************************************************/
+
 #include "archway.h"
 #include "ui_archway.h"
 
 ArchWay::ArchWay(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::ArchWay), m_dictionary{ new QMap<QString, QList<PathInfo>>() }
+    , ui(new Ui::ArchWay), m_dictionary{ QMap<QString, QList<PathInfo> >() }
 {
     ui->setupUi(this);
     ui->left_wdg->setLayout( new QVBoxLayout );
 
-    QString grp_1("Group1");
-    auto lst_1 = this->createList1();
+    // dummy lists
+    PathInfo info(QString("C:\\Users\\test\\Downloads\\12 weeks scoreboard.pdf"));
+    QList<PathInfo> lst1;
+    lst1 << info;
 
-    QString grp_2("Group2");
-    auto lst_2 = this->createList2();
+    PathInfo info1(QString("C:\\Users\\test\\OneDrive\\Documenti\\Desktop\\dati.xlsx"));
+    PathInfo info2(QString("C:\\Users\\test\\OneDrive\\Documenti\\Desktop\\QuickRunPro"));
+    PathInfo info3(QString("C:\\Users\\test\\OneDrive\\Doci"));
+    QList<PathInfo> lst2;
+    lst2 << info << info2 << info3;
 
-    QString grp_3("Group3");
-    auto lst_3 = this->createList3();
+    PathInfo infoa(QString("C:\\Users\\test\\qwerty.xlsx"));
+    PathInfo infob(QString("C:\\Users\\Desktop\\folder"));
+    PathInfo infoc(QString("C:\\Users\\test\\OneDrive\\Dodici"));
+    PathInfo infod(QString("C:\\Users\\Desktop\\folder"));
+    PathInfo infof(QString("C:\\Users\\basic_file.txt"));
+    QList<PathInfo> lst3;
+    lst3 << infoa << infob << infoc << infod << infof;
 
-    m_dictionary->insert(grp_1, lst_1);
-    m_dictionary->insert(grp_2, lst_2);
-    m_dictionary->insert(grp_3, lst_3);
+    // fill the QMap
+    m_dictionary["Group1"] = lst1;
+    m_dictionary["Group2"] = lst2;
+    m_dictionary["Group3"] = lst3;
 
     // create the model
-    auto& model = this->getListByIndex( m_dictionary, 0);
-    m_model = new PathsInfoTableModel( model , this );
+    QList<PathInfo>& curr_lst = m_dictionary["Group1"];
+    m_model = new PathsInfoTableModel( &curr_lst , this );
 
     // istanciate the groupEditor_widget
-    //m_group_editor = new GroupEditor( m_model, this );
-    //ui->left_wdg->layout()->addWidget( m_group_editor );
+    m_group_editor = new GroupEditor( m_model, this );
+    ui->left_wdg->layout()->addWidget( m_group_editor );
 
 
     // connect the group_list changed signal to the groupEditor
@@ -36,7 +88,6 @@ ArchWay::ArchWay(QWidget *parent)
 
 ArchWay::~ArchWay()
 {
-    delete m_dictionary;
     delete ui;
 }
 
@@ -66,111 +117,37 @@ void ArchWay::loadJsonDictionary()
 }
 
 
-void ArchWay::updateModelData( QList<PathInfo>& data )
-{
-    m_model->setListData( data );
-}
-
-
-QString ArchWay::getKeyByIndex(const QMap<QString, QList<PathInfo>>* map, int index) const
-{
-    if (index < 0 || index >= map->size()) {
-        qWarning() << "Index out of bounds";
-        return QString();
-    }
-
-    auto it = map->begin();
-    std::advance(it, index);
-    return it.key();
-}
-
-
-QList<PathInfo>& ArchWay::getListByIndex(QMap<QString, QList<PathInfo>>* map, int index) const
-{
-    if (index < 0 || index >= map->size()) {
-        qWarning() << "Index out of bounds";
-        static QList<PathInfo> empty;
-        return empty;
-    }
-
-    auto it = map->begin();
-    std::advance(it, index);
-    return it.value();
-}
-
 
 void ArchWay::on_testGroup1_clicked()
 {
-    auto group = this->getKeyByIndex( m_dictionary, 0);
-    //this->m_group_editor->setGroupName( group );
-
-    this->updateModelData( (*m_dictionary)[group] );
+    auto& group1 = m_dictionary["Group1"];
+    m_model->setListData( &group1 );
+    //QString group("GroupName 1");
+    //m_group_editor->setGroupName(group);
 }
 
 
 void ArchWay::on_testGroup2_clicked()
 {
-    auto group = this->getKeyByIndex( m_dictionary, 1);
-    //this->m_group_editor->setGroupName( group );
-
-    this->updateModelData( (*m_dictionary)[group] );
+    auto& group2 = m_dictionary["Group2"];
+    m_model->setListData( &group2 );
+    //QString group("GroupName 2");
+    //m_group_editor->setGroupName(group);
 }
 
 
 void ArchWay::on_testGroup3_clicked()
 {
 
-    auto group = this->getKeyByIndex( m_dictionary, 2);
-    //this->m_group_editor->setGroupName( group );
-
-    this->updateModelData( (*m_dictionary)[group] );
+    auto& group3 = m_dictionary["Group3"];
+    m_model->setListData( &group3 );
+    //QString group("GroupName 3");
+    //m_group_editor->setGroupName(group);
 }
 
 
-QList<PathInfo> ArchWay::createList1() const
+void ArchWay::on_testToggleEditor_clicked(bool checked)
 {
-    PathInfo info(QString("C:\\Users\\test\\Downloads\\12 weeks scoreboard.pdf"));
-
-    QList<PathInfo> p_inf;
-    p_inf << info;
-    return p_inf;
-}
-
-
-QList<PathInfo> ArchWay::createList2() const
-{
-    PathInfo info(QString("C:\\Users\\test\\OneDrive\\Documenti\\Desktop\\dati buste paga.xlsx"));
-    PathInfo info2(QString("C:\\Users\\test\\OneDrive\\Documenti\\Desktop\\QuickRunPro"));
-    PathInfo info3(QString("C:\\Users\\test\\OneDrive\\Doci"));
-
-    QList<PathInfo> p_inf;
-    p_inf << info << info2 << info3;
-
-    return p_inf;
-}
-
-
-QList<PathInfo> ArchWay::createList3() const
-{
-    PathInfo info(QString("C:\\Users\\test\\Downloads\\mic.png"));
-    PathInfo info1(QString("C:\\Users\\test\\Downloads"));
-    PathInfo info2(QString("C:\\Users\\test\\Documenti"));
-    PathInfo info3(QString("C:\\Users\\test\\OneDrive\\Documenti\\Books\\VB Scripting For Catia V5 (Nick Weisenberger) (z-lib.org).pdf"));
-    PathInfo info4(QString("C:\\Users\\test\\OneDrive"));
-
-    QList<PathInfo> p_inf;
-    p_inf << info << info2 << info3 << info4;
-
-    return p_inf;
-}
-
-
-
-
-
-
-void ArchWay::on_testToggleEditor_toggled(bool checked)
-{
-    this->m_group_editor->setVisible( checked );
+    m_group_editor->setVisible( checked );
 }
 

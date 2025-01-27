@@ -16,18 +16,18 @@ SOURCES += \
     customWidgets\statechip.cpp \
     customWidgets\pathinfo.cpp \
     customWidgets\toggleswitchdelegate.cpp \
-    pathsinfotablemodel.cpp \
-    archway.cpp
+    archway.cpp \
+    pathsinfotablemodel.cpp
 
 HEADERS += \
     archway.h \
     groupeditor.h \
-    pathsinfotablemodel.h \
     customWidgets\mapperpathinfo.h \
     customWidgets\viewtogglesw.h \
     customWidgets\statechip.h \
     customWidgets\pathinfo.h \
-    customWidgets\toggleswitchdelegate.h
+    customWidgets\toggleswitchdelegate.h \
+    pathsinfotablemodel.h
 
 FORMS += \
     archway.ui \

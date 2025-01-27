@@ -1,6 +1,48 @@
+/****************************************************************************
+**
+** Copyright (C) 2012 Nokia Corporation and/or its subsidiary(-ies).
+** Contact: http://www.qt-project.org/
+**
+** This file is part of the QtSql module of the Qt Toolkit.
+**
+** $QT_BEGIN_LICENSE:LGPL$
+** GNU Lesser General Public License Usage
+** This file may be used under the terms of the GNU Lesser General Public
+** License version 2.1 as published by the Free Software Foundation and
+** appearing in the file LICENSE.LGPL included in the packaging of this
+** file. Please review the following information to ensure the GNU Lesser
+** General Public License version 2.1 requirements will be met:
+** http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+**
+** In addition, as a special exception, Nokia gives you certain additional
+** rights. These rights are described in the Nokia Qt LGPL Exception
+** version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
+**
+** GNU General Public License Usage
+** Alternatively, this file may be used under the terms of the GNU General
+** Public License version 3.0 as published by the Free Software Foundation
+** and appearing in the file LICENSE.GPL included in the packaging of this
+** file. Please review the following information to ensure the GNU General
+** Public License version 3.0 requirements will be met:
+** http://www.gnu.org/copyleft/gpl.html.
+**
+** Other Usage
+** Alternatively, this file may be used in accordance with the terms and
+** conditions contained in a signed written agreement between you and Nokia.
+**
+**
+**
+**
+**
+**
+** $QT_END_LICENSE$
+**
+****************************************************************************/
+
+
 #include "pathsinfotablemodel.h"
 
-PathsInfoTableModel::PathsInfoTableModel(QList<PathInfo> group, QObject *parent)
+PathsInfoTableModel::PathsInfoTableModel(QList<PathInfo>* group, QObject *parent)
     : QAbstractTableModel{parent}, m_model_data{ group }
 {}
 
@@ -26,7 +68,7 @@ int PathsInfoTableModel::rowCount(
 ) const
 {
     Q_UNUSED(parent)
-    return m_model_data.size();
+    return m_model_data->size();
 }
 
 
@@ -47,7 +89,7 @@ QVariant PathsInfoTableModel::data(
 
     auto col = index.column();
     auto row = index.row();
-    PathInfo p = m_model_data.at(row);
+    PathInfo p = m_model_data->at(row);
 
     // add pixmap to first and third column
     if ( role == Qt::DecorationRole && (col == 0 || col == 2) )
@@ -73,7 +115,7 @@ QVariant PathsInfoTableModel::data(
         return ( is_path_valid ) ? p.VALID_PIX : p.INVALID_PIX;
     }
 
-    if ( role == Qt::DisplayRole && col == 1 )
+    if ( role == Qt::DisplayRole && ( col == 1 || col == 3 ) )
     {
         return p[col];
     }
@@ -103,14 +145,14 @@ bool PathsInfoTableModel::setData(
     QModelIndex fileTypeIdx = createIndex(row, 0);
     QModelIndex validityIdx = createIndex(row, 2);
 
-    if ( !index.isValid() || row >= m_model_data.size() )
+    if ( !index.isValid() || row >= m_model_data->size() )
         return false;
 
 
     if ( role == Qt::DisplayRole || role == Qt::EditRole )
     {
         // get PathInfo at row index.row()
-        PathInfo& pathInfo = m_model_data[row];
+        PathInfo& pathInfo = (*m_model_data)[row];
 
         if ( col == 1 )          // edit the path_column
         {
@@ -190,7 +232,7 @@ QVariant PathsInfoTableModel::headerData(
 }
 
 
-void PathsInfoTableModel::setListData( QList<PathInfo>& new_paths_list )
+void PathsInfoTableModel::setListData( QList<PathInfo>* new_paths_list )
 {
     beginResetModel();
     m_model_data = new_paths_list;
