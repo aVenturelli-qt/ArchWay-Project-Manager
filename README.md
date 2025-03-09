@@ -1,6 +1,6 @@
 ## ARCHWAY Project Manager
 
-<img align="center" width="800" src="https://github.com/user-attachments/assets/30de7b4a-3abd-4abe-a364-285c4b305f25">
+<img align="center" width="800" src="https://github.com/user-attachments/assets/cca6c162-d9d7-428c-9681-f9203b39195f">
 
 
 ### *disclaimer*:
