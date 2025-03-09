@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CRUDcontrols</class>
+ <widget class="QWidget" name="CRUDcontrols">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>284</width>
+    <height>80</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>36000</width>
+    <height>10000</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#container
+{
+	border-radius: 40;
+	background-color: white;
+	border: 2px solid black;
+}
+
+
+
+#container QPushButton
+{
+	border-radius: 30;
+	background-color: white;
+	padding-top: 4;
+	padding-bottom: 4;
+	padding-left: 4;
+	padding-right: 4;
+	border: 2px solid black;
+}
+
+
+
+/*
+*
+*			ADD BUTTON
+*/
+#container #addBtn
+{
+	background-color: rgb( 170, 170, 255 );
+}
+
+#container #addBtn:hover
+{
+	background-color: rgb( 180, 180, 255 );
+}
+
+#container #addBtn::pressed
+{
+	background-color: rgb( 160, 160, 255 );
+	border: 2px solid rgba(0, 0, 0, 232);
+}
+
+
+
+/*
+*
+*			EDIT BUTTON
+*/
+#container #editBtn
+{
+	background-color: white;
+}
+
+#container #editBtn:hover
+{
+	background-color: rgb( 220, 220, 255 );
+}
+
+#container #editBtn::pressed
+{
+	background-color: rgb( 210, 210, 255 );
+	border: 2px solid rgba(0, 0, 0, 240);
+}
+
+#container #editBtn:disabled
+{
+	background-color: rgb( 200, 200, 200 );
+	border: 2px solid rgba( 20, 20, 20, 200);
+}
+
+
+/*
+*
+*			DELETE BUTTON
+*/
+#container #deleteBtn
+{
+	background-color: white;
+}
+
+#container #deleteBtn:hover
+{
+	background-color: rgb( 235, 140, 140 );
+}
+
+#container #deleteBtn::pressed
+{
+	background-color: rgb( 235, 120, 120 );
+	border: 2px solid rgb(200, 20, 20 );
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QWidget" name="container" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="leftMargin">
+       <number>12</number>
+      </property>
+      <property name="topMargin">
+       <number>8</number>
+      </property>
+      <property name="rightMargin">
+       <number>12</number>
+      </property>
+      <property name="bottomMargin">
+       <number>8</number>
+      </property>
+      <item>
+       <widget class="QPushButton" name="addBtn">
+        <property name="minimumSize">
+         <size>
+          <width>60</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>60</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../assets.qrc">
+          <normaloff>:/icons/topLvl/asset/icons/addIcon.svg</normaloff>:/icons/topLvl/asset/icons/addIcon.svg</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Policy::Preferred</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="editBtn">
+        <property name="minimumSize">
+         <size>
+          <width>60</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>60</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../assets.qrc">
+          <normaloff>:/icons/topLvl/asset/icons/editIcon.svg</normaloff>:/icons/topLvl/asset/icons/editIcon.svg</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Policy::Preferred</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="deleteBtn">
+        <property name="minimumSize">
+         <size>
+          <width>60</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>60</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../assets.qrc">
+          <normaloff>:/icons/pathEditor/asset/icons/black_delete_icon.svg</normaloff>:/icons/pathEditor/asset/icons/black_delete_icon.svg</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>36</width>
+          <height>36</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../assets.qrc"/>
+ </resources>
+ <connections/>
+</ui>

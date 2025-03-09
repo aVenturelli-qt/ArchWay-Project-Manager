@@ -1,0 +1,20 @@
+<RCC>
+    <qresource prefix="/icons/topLvl">
+        <file>asset/icons/addIcon.svg</file>
+        <file>asset/icons/deleteIcon.svg</file>
+        <file>asset/icons/editIcon.svg</file>
+        <file>asset/icons/X_black.svg</file>
+    </qresource>
+    <qresource prefix="/icons/pathEditor">
+        <file>asset/icons/add_icon.svg</file>
+        <file>asset/icons/delete_icon.svg</file>
+        <file>asset/icons/file_icon.svg</file>
+        <file>asset/icons/folder_icon.svg</file>
+        <file>asset/icons/not_existing_icon.svg</file>
+        <file>asset/icons/refresh_icon.svg</file>
+        <file>asset/icons/black_delete_icon.svg</file>
+        <file>asset/icons/cross_arrow_wh.svg</file>
+        <file>asset/icons/Group_icon.svg</file>
+        <file>asset/images/ArchWay_icon.svg</file>
+    </qresource>
+</RCC>
