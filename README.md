@@ -10,10 +10,10 @@
 - Step 2: Unzip the folder and rename it as ArchWay
 - Step 3: Place the folder in any directory you would like, beside the ones that required AdminPrivilages for saving
   because the Groups are stored in a json document and saved to it every time you close the app.
-```sh
-Missing to follow this directive, will cause a "Permission Denied" error by the system
-complaining about the application not having access to modify the json file
-```
+  ```sh
+  Missing to follow the above directive, will cause a "Permission Denied" error by the system
+  complaining about the application not having access to modify the json file
+  ```
 - Step 4: [optional] You can open the project dir and right-clicking on the *ArchWay.exe* you can add it to the taskbar for easy access. 
 
 👨‍💻 ### KEEP IN TOUCH: 🤜🤛
