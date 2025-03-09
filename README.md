@@ -16,7 +16,7 @@
   ```
 - Step 4: [optional] You can open the project dir and right-clicking on the *ArchWay.exe* you can add it to the taskbar for easy access. 
 
-👨‍💻 ### KEEP IN TOUCH: 🤜🤛
+👨‍💻 ###KEEP IN TOUCH: 🤜🤛
 > for report bugs, suggest features and improvements or ask questions about the program's implementation details,
 > send me an email at **aventurelli.github@gmail.com**
 
